@@ -13,6 +13,8 @@ Our project is to develop an asset allocation web application that enables users
 1. Matthew Eiley, 261177542, matthew.eiley@mail.mcgill.ca
 2. Trevor Piltch, 261171660, trevor.piltch@mail.mcgill.ca
 3. Mario Ghorayeb, XXXXXXXXX, mario.ghorayeb@mail.mcgill.ca
+4. Boris Vassilev, 261081156, boris.vassilev@mail.mcgill.ca
+5. Yixuan Qin, XXXXXXXXX, yixuan.qin@mail.mcgill.ca
 
 #### The Scrum master in the first Sprint will be:
 Matthew Eiley, 261177542, matthew.eiley@mail.mcgill.ca
