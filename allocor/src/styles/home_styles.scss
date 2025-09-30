@@ -27,13 +27,12 @@ body {
 section {
 	display: flex;
 	min-height: 100vh;
-	padding: 50px;
 	justify-content: center;
 	align-items: center;
 	background: #222;
 	color: #fff;
 	position: relative;
-	
+    // padding: 50px;
 	&:after {
 		content: "";
 		position: absolute;
@@ -55,13 +54,18 @@ section {
 
 section#team {
   display: block;
-  padding: 0;
   overflow: hidden;
   position: relative;
+  background-color: #a0a0a0;
   &:after {
     display: none;
   }
 }
+
+section .content {
+  padding: 50px;
+}
+
 
 header {
 	z-index: 99999;

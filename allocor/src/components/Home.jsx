@@ -12,22 +12,12 @@ export default function Home() {
         var openMenuButton = document.getElementById('openmenu');
 
         const handleScroll = function() {
-            page.classList.remove('menuopen');
-            if (window.scrollY >= 100) {
-                header.classList.add('sticky');
-            } else {
-                header.classList.remove('sticky');
-            }
-
-            // // Show/hide canvas based on scroll position
-            // const allocorSection = document.getElementById('allocor');
-            // const canvas = canvasRef.current;
-            
-            // if (allocorSection && canvas) {
-            //     const rect = allocorSection.getBoundingClientRect();
-            //     const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-            //     canvas.style.opacity = isVisible ? '1' : '0';
-            // }
+        page.classList.remove('menuopen');
+        if (window.scrollY >= 100) {
+            header.classList.add('sticky');
+        } else {
+            header.classList.remove('sticky');
+        }
         };
 
         const handleMenuClick = function() {
@@ -44,17 +34,21 @@ export default function Home() {
         var links = document.querySelectorAll('a[href^="#"]');
 
         links.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                var targetId = this.getAttribute('href');
-                var targetElement = document.querySelector(targetId);
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            var targetId = this.getAttribute('href');
+            var targetElement = document.querySelector(targetId);
 
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+            if (targetElement) {
+            // Calculate the exact position to scroll to
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
+            }
+        });
         });
 
         return () => {
@@ -120,8 +114,7 @@ export default function Home() {
                 <img id="logo" src="logos/allocor.png" alt="allocor logo" />
                 <nav>
                     <a href="#allocor">allocor</a>
-                    <a href="#idk1">idk1</a>
-                    <a href="#idk2">idk2</a>
+                    <a href="#optimize">optimize</a>
                     <a href="#team">team</a>
                     <button id="openmenu">
                         <span></span>
@@ -134,11 +127,8 @@ export default function Home() {
                     <canvas ref={canvasRef} id="tubes-canvas"></canvas>
                     <h1>allocor.</h1>
                 </section>
-                <section id="idk1">
-                    <h1>idk1.</h1>
-                </section>
-                <section id="idk2">
-                    <h1>idk2.</h1>
+                <section id="optimize">
+                    <h1>optimize.</h1>
                 </section>
                 <section id="team">
                     <Team/>
