@@ -134,9 +134,9 @@ export default function Team() {
 
                 <div className="carousel-item">
                     <div className="carousel-box">
-                        <div className="title">Member 6</div>
-                        <div className="num">06</div>
-                        <img src="/team_members/idk.jpg" alt="idk6" />
+                        <div className="title">Youdas Yessad</div>
+                        <div className="num">U3</div>
+                        <img src="/team_members/youdas.jpg" alt="youdas" />
                     </div>
                 </div>
 
