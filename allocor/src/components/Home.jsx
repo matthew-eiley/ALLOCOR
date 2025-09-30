@@ -120,8 +120,8 @@ export default function Home() {
                 <img id="logo" src="logos/allocor.png" alt="allocor logo" />
                 <nav>
                     <a href="#allocor">allocor</a>
-                    <a href="#knowledge">Knowledge</a>
-                    <a href="#space">Space</a>
+                    <a href="#idk1">idk1</a>
+                    <a href="#idk2">idk2</a>
                     <a href="#team">team</a>
                     <button id="openmenu">
                         <span></span>
@@ -134,13 +134,13 @@ export default function Home() {
                     <canvas ref={canvasRef} id="tubes-canvas"></canvas>
                     <h1>allocor.</h1>
                 </section>
-                <section id="knowledge">
-                    <h1>Knowledge.</h1>
+                <section id="idk1">
+                    <h1>idk1.</h1>
                 </section>
-                <section id="space" style={{backgroundImage:'url(https://assets.codepen.io/214624/space.jpg)'}}>
-                    <h1>Space.</h1>
+                <section id="idk2">
+                    <h1>idk2.</h1>
                 </section>
-                <section id="team" style={{backgroundImage:'url(https://assets.codepen.io/214624/knowledge.jpg)'}}>
+                <section id="team">
                     <Team/>
                 </section>
             </div>
