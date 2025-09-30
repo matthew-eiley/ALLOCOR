@@ -26,13 +26,12 @@ body {
 
 section {
 	display: flex;
-	min-height: 100vh;
+	// min-height: 100vh;
 	justify-content: center;
 	align-items: center;
 	background: #222;
 	color: #fff;
 	position: relative;
-    // padding: 50px;
 	&:after {
 		content: "";
 		position: absolute;
@@ -51,19 +50,18 @@ section {
 		position: relative;
 	}
 }
+section#allocor {
+    min-height: 100vh;
+}
 
 section#team {
   display: block;
   overflow: hidden;
   position: relative;
-  background-color: #a0a0a0;
+  background: linear-gradient(135deg, gray, black);
   &:after {
     display: none;
   }
-}
-
-section .content {
-  padding: 50px;
 }
 
 
