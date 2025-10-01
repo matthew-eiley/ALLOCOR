@@ -14,7 +14,7 @@ Our project is to develop an asset allocation web application that enables users
 2. Trevor Piltch, 261171660, trevor.piltch@mail.mcgill.ca
 3. Mario Ghorayeb, XXXXXXXXX, mario.ghorayeb@mail.mcgill.ca
 4. Boris Vassilev, 261081156, boris.vassilev@mail.mcgill.ca
-5. Yixuan Qin, XXXXXXXXX, yixuan.qin@mail.mcgill.ca
+5. Yixuan Qin, 261010963, yixuan.qin@mail.mcgill.ca
 6. Youdas Yessad, 261183246, youdas.yessad@mail.mcgill.ca
 
 #### The Scrum master in the first Sprint will be:
