@@ -6,7 +6,7 @@ Our project is to develop an asset allocation web application that enables users
 
 #### Technologies used:
 - Frontend: React, Chart.js
-- Backend: Python (Django), Pandas, NumPy
+- Backend: Python (Django), Pandas, NumPy, ScipPy
 - Data: Yahoo Finance API (yfinance)
 
 #### Team members are:
@@ -17,7 +17,7 @@ Our project is to develop an asset allocation web application that enables users
 5. Yixuan Qin, 261010963, yixuan.qin@mail.mcgill.ca
 6. Youdas Yessad, 261183246, youdas.yessad@mail.mcgill.ca
 
-#### The Scrum master in the first Sprint will be:
+#### The Scrum Master in the first Sprint will be:
 Matthew Eiley, 261177542, matthew.eiley@mail.mcgill.ca
 
 #### The Proxy Product Owner in the first Sprint will be:
