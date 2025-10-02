@@ -12,7 +12,7 @@ Our project is to develop an asset allocation web application that enables users
 #### Team members are:
 1. Matthew Eiley, 261177542, matthew.eiley@mail.mcgill.ca
 2. Trevor Piltch, 261171660, trevor.piltch@mail.mcgill.ca
-3. Mario Ghorayeb, XXXXXXXXX, mario.ghorayeb@mail.mcgill.ca
+3. Mario Ghorayeb, 261031910, mario.ghorayeb@mail.mcgill.ca
 4. Boris Vassilev, 261081156, boris.vassilev@mail.mcgill.ca
 5. Yixuan Qin, 261010963, yixuan.qin@mail.mcgill.ca
 6. Youdas Yessad, 261183246, youdas.yessad@mail.mcgill.ca
