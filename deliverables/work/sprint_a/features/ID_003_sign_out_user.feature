@@ -1,4 +1,4 @@
-Feature: Sign out user
+Feature: Sign Out User
 
     As a registered user
     I want to be able to sign out of my account

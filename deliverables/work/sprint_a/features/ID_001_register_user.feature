@@ -1,4 +1,4 @@
-Feature: User Registration
+Feature: Register User
 
     As a new user
     I want to register an account
@@ -6,10 +6,14 @@ Feature: User Registration
 
     Scenario: Successful registration with valid details
         Given I am on the registration page
-        When I enter a valid username, email, and password
+        When I fill in the registration form with the following details:
+        | Username    | newuser    |
+        | Email      | user@example.com |
+        | Password   | SecurePass123! |
+        | Confirm Password | SecurePass123! |
         And I submit the registration form
         Then I should see a confirmation message
-        And my account should be created
+        And my account should be created in the system
 
     Scenario: Registration with an already used email
         Given I am on the registration page
