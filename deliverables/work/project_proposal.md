@@ -16,6 +16,7 @@ Our project is to develop an asset allocation web application that enables users
 4. Boris Vassilev, 261081156, boris.vassilev@mail.mcgill.ca
 5. Yixuan Qin, 261010963, yixuan.qin@mail.mcgill.ca
 6. Youdas Yessad, 261183246, youdas.yessad@mail.mcgill.ca
+7. Hakim Bekkari, 261043083, hakim.bekkari@mail.mcgill.ca
 
 #### The Scrum Master in the first Sprint will be:
 Matthew Eiley, 261177542, matthew.eiley@mail.mcgill.ca
