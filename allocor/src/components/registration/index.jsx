@@ -31,8 +31,17 @@ export default function Register({ onRegisterSuccess }) {
         }
     }, [notification.message]);
 
-    // Mock database of existing emails (this should be replaced with actual backend check)
-    const existingEmails = ['test@test.com', 'user@example.com'];
+    // Get users from localStorage
+    const getUsers = () => {
+        const users = localStorage.getItem('users');
+        return users ? JSON.parse(users) : [];
+    };
+
+    // Check if email already exists in localStorage
+    const isEmailTaken = (email) => {
+        const users = getUsers();
+        return users.some(user => user.email === email);
+    };
 
     const validateForm = () => {
         let tempErrors = {};
@@ -102,12 +111,12 @@ export default function Register({ onRegisterSuccess }) {
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const { isValid, tempErrors } = validateForm();
 
         if (!isValid) {
-            // Build notification from the errors we just computed (don't rely on `errors` state here)
+            // Build notification from the errors we just computed
             const errorMessages = Object.values(tempErrors).filter(Boolean);
             setNotification({
                 message: errorMessages.join(' • '),
@@ -116,38 +125,34 @@ export default function Register({ onRegisterSuccess }) {
             return;
         }
 
+        // Check if email is already taken
+        if (isEmailTaken(formData.email)) {
+            setNotification({ message: 'Email already exists.', type: 'error' });
+            return;
+        }
+
         try {
-            // Call the backend registration endpoint
-            const res = await fetch('http://localhost:4000/api/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username: formData.username,
-                    email: formData.email,
-                    password: formData.password
-                })
+            // Get existing users
+            const users = getUsers();
+            
+            // Add new user
+            users.push({
+                username: formData.username,
+                email: formData.email,
+                password: formData.password // Note: In a real app, you'd want to hash this
             });
 
-            const data = await res.json().catch(() => ({}));
+            // Save to localStorage
+            localStorage.setItem('users', JSON.stringify(users));
 
-            if (res.status === 201) {
-                setNotification({ message: 'Registration successful!', type: 'success' });
-                setFormData({ username: '', email: '', password: '', confirmPassword: '' });
-                setErrors({ username: '', email: '', password: '', confirmPassword: '' });
-                // Navigate to home page after successful registration
-                if (onRegisterSuccess) {
-                    onRegisterSuccess();
-                }
-            } else if (res.status === 409) {
-                setNotification({ message: data.message || 'Email already exists.', type: 'error' });
-            } else if (res.status === 400) {
-                // Server-side validation errors
-                const serverMessage = data.message || Object.values(data.errors || {}).filter(Boolean).join(' • ');
-                setNotification({ message: serverMessage || 'Registration failed (validation).', type: 'error' });
-                // show server-side errors inline if provided
-                if (data.errors) setErrors(prev => ({ ...prev, ...data.errors }));
-            } else {
-                setNotification({ message: data.message || 'Registration failed: Please try again later.', type: 'error' });
+            // Clear form and show success
+            setNotification({ message: 'Registration successful!', type: 'success' });
+            setFormData({ username: '', email: '', password: '', confirmPassword: '' });
+            setErrors({ username: '', email: '', password: '', confirmPassword: '' });
+
+            // Navigate to home page after successful registration
+            if (onRegisterSuccess) {
+                onRegisterSuccess();
             }
         } catch (error) {
             setNotification({ message: 'Registration failed: Please try again later.', type: 'error' });
