@@ -1,4 +1,4 @@
-import { findAccountById } from '../models/accountModel.js';
+import { findAccountById, accounts, listAccounts } from '../models/accountModel.js';
 
 export async function getAccountDetails(req, res) {
   const { id } = req.params;
@@ -17,4 +17,32 @@ export async function getAccountDetails(req, res) {
   }
 }
 
-export default { getAccountDetails };
+
+export async function updateAccountDetails(req, res) {
+  try {
+    const { id } = req.params;
+    const { name, email, profile } = req.body;
+
+    const account = findAccountById(id);
+    if (!account) {
+      return res.status(404).json({ error: 'Account not found' });
+    }
+
+    const duplicate = listAccounts().find(a => a.email === email && a.id !== id);
+    if (duplicate) {
+      return res.status(409).json({ error: 'Email is already in use' });
+    }
+
+
+    if (name) account.name = name;
+    if (email) account.email = email;
+    if (profile?.bio) account.profile.bio = profile.bio;
+
+    return res.status(200).json({ message: 'Account updated successfully', account });
+  } catch (err) {
+    console.error('Update account error:', err);
+    return res.status(500).json({ error: 'Unexpected error' });
+  }
+}
+
+export default { getAccountDetails, updateAccountDetails };

@@ -28,4 +28,20 @@ export function listAccounts() {
   return accounts.slice();
 }
 
-export default { findAccountById, listAccounts };
+export function updateAccountById(id, data) {
+  const account = accounts.find((a) => a.id === String(id));
+  if (!account) return null;
+
+  if (data.email && accounts.some((a) => a.email === data.email && a.id !== String(id))) {
+    throw new Error('DUPLICATE_EMAIL');
+  }
+
+  if (data.email) account.email = data.email;
+  if (data.name) account.name = data.name;
+  if (data.profile?.bio) account.profile.bio = data.profile.bio;
+
+  return account;
+}
+
+
+export default { findAccountById, listAccounts, updateAccountById, accounts };
