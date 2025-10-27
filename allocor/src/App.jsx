@@ -5,9 +5,11 @@ import Home from './components/Home'
 import Register from './components/registration'
 
 function App() {
+  const [isRegistered, setIsRegistered] = useState(false)
+
   return (
     <>
-      <Register />
+      {isRegistered ? <Home /> : <Register onRegisterSuccess={() => setIsRegistered(true)} />}
     </>
   )
 }

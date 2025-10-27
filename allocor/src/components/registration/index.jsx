@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './styles.scss';
 
-export default function Register() {
+export default function Register({ onRegisterSuccess }) {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -134,6 +134,10 @@ export default function Register() {
                 setNotification({ message: 'Registration successful!', type: 'success' });
                 setFormData({ username: '', email: '', password: '', confirmPassword: '' });
                 setErrors({ username: '', email: '', password: '', confirmPassword: '' });
+                // Navigate to home page after successful registration
+                if (onRegisterSuccess) {
+                    onRegisterSuccess();
+                }
             } else if (res.status === 409) {
                 setNotification({ message: data.message || 'Email already exists.', type: 'error' });
             } else if (res.status === 400) {
