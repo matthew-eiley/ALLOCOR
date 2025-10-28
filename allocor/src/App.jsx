@@ -1,16 +1,23 @@
-import { useState } from 'react'
-import './App.css'
-import Team from './components/Team'
-import Home from './components/Home'
+import "./App.css";
+import Team from "./components/Team";
+import Home from "./components/Home";
+import PasswordResetPage from "./pages/PasswordResetPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { UIProvider } from "./store/ui-context";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <Home/>
+      <UIProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/password-reset" element={<PasswordResetPage />} />
+          </Routes>
+        </BrowserRouter>
+      </UIProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
