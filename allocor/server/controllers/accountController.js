@@ -45,4 +45,13 @@ export async function updateAccountDetails(req, res) {
   }
 }
 
-export default { getAccountDetails, updateAccountDetails };
+export async function signOutUser(req, res) {
+  try {
+    res.clearCookie('authToken');
+    return res.status(200).json({ message: 'User signed out successfully' });
+  } catch (err) {
+    return res.status(500).json({ error: 'Error signing out user' });
+  }
+}
+
+export default { getAccountDetails, updateAccountDetails, signOutUser };
