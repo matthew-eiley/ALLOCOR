@@ -3,13 +3,14 @@ import './App.css'
 import Team from './components/Team'
 import Home from './components/Home'
 import Register from './components/registration'
+import SignOutButton from './components/auth/SignOutButton'
 
 function App() {
   const [isRegistered, setIsRegistered] = useState(false)
 
   return (
     <>
-      {isRegistered ? <Home /> : <Register onRegisterSuccess={() => setIsRegistered(true)} />}
+      <SignOutButton onSignOut={() => setIsRegistered(false)} />
     </>
   )
 }
