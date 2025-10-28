@@ -2,9 +2,10 @@ import React from 'react';
 import './SignOutButton.scss';
 
 export default function SignOutButton({ onSignOut }) {
-  const handleSignOut = () => {
-    
+  const handleSignOut = async () => {
+
     // Clear client session
+    await fetch('/api/accounts/signout', { method: 'POST', credentials: 'include' });
     localStorage.removeItem('currentUser');
     localStorage.removeItem('authToken');
 
