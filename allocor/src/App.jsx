@@ -11,7 +11,7 @@ function App() {
     <>
       {isRegistered ? <Home /> : <Register onRegisterSuccess={() => setIsRegistered(true)} />}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
