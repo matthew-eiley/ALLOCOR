@@ -43,5 +43,4 @@ export function updateAccountById(id, data) {
   return account;
 }
 
-
-export default { findAccountById, listAccounts, updateAccountById, accounts };
+export { accounts };
