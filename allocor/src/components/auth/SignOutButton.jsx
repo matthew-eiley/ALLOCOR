@@ -2,16 +2,22 @@ import React from 'react';
 import './SignOutButton.scss';
 
 export default function SignOutButton({ onSignOut }) {
-  const handleSignOut = async () => {
+    const handleSignOut = async () => {
+    try {
+        await fetch('/api/accounts/signout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        });
 
-    // Clear client session
-    await fetch('/api/accounts/signout', { method: 'POST', credentials: 'include' });
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('authToken');
+        // Clear local session
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('authToken');
 
-    // Notify parent or trigger API call
-    if (onSignOut) onSignOut();
-  };
+        if (onSignOut) onSignOut();
+    } catch (error) {
+        console.error('Sign out failed:', error);
+    }
+    };
 
   return (
     <button className="signout-button" onClick={handleSignOut}>
@@ -19,3 +25,4 @@ export default function SignOutButton({ onSignOut }) {
     </button>
   );
 }
+
