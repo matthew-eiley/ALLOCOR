@@ -1,14 +1,22 @@
-import express from "express";
-import userResetRouter from "./routes/passwordReset.js";
-import registerRouter from "./routes/register.js";
-import cors from "cors";
+import express from 'express';
+import accountsRouter from './routes/accounts.js';
+import portfoliosRouter from './routes/portfolios.js';
 
 const app = express();
-app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 
-// Routes
-app.use("/api/user", userResetRouter);
-app.use("/api", registerRouter);
+app.use('/api/accounts', accountsRouter);
+app.use('/api/portfolios', portfoliosRouter);
+
+
+app.get('/__health', (req, res) => res.json({ status: 'ok' }));
+
+
+if (process.env.NODE_ENV !== 'test') {
+  const port = process.env.PORT || 4000;
+  app.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
+  });
+}
 
 export default app;

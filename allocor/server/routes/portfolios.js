@@ -1,0 +1,27 @@
+import express from 'express';
+import {
+  getPortfolio,
+  getUserPortfolios,
+  calculateRebalance,
+  executeRebalance
+} from '../controllers/portfolioController.js';
+import { backtestPortfolio } from '../controllers/portfolioController.js';
+
+const router = express.Router();
+
+// Get specific portfolio by ID
+router.get('/:id', getPortfolio);
+
+// Get all portfolios for a user
+router.get('/user/:userId', getUserPortfolios);
+
+// Calculate rebalance plan for a portfolio (monthly rebalance logic)
+router.get('/:id/rebalance/calculate', calculateRebalance);
+
+// Execute rebalance for a portfolio
+router.post('/:id/rebalance/execute', executeRebalance);
+
+// Run backtest (supports weekly frequency for now). Accepts body { frequency, startDate, endDate } and ?export=csv|json
+router.post('/:id/backtest', backtestPortfolio);
+
+export default router;
