@@ -299,6 +299,7 @@
 import { useEffect, useRef } from "react"
 import "../styles/home_styles.scss"
 import Team from "./Team"
+import PortfolioChart from "./PortfolioChart"
 
 export default function Home() {
   const canvasRef = useRef(null)
@@ -449,6 +450,7 @@ export default function Home() {
         </section>
         <section id="optimize">
           <h1>optimize.</h1>
+          <PortfolioChart />
         </section>
         <section id="team">
           <Team />
