@@ -21,7 +21,7 @@ router.get('/:id/rebalance/calculate', calculateRebalance);
 // Execute rebalance for a portfolio
 router.post('/:id/rebalance/execute', executeRebalance);
 
-// Run backtest (supports weekly frequency for now). Accepts body { frequency, startDate, endDate } and ?export=csv|json
+// Run backtest (supports weekly and quarterly frequency for now). Accepts body { frequency, startDate, endDate } and ?export=csv|json
 router.post('/:id/backtest', backtestPortfolio);
 
 export default router;

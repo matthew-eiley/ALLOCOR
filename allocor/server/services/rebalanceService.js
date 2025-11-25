@@ -181,6 +181,61 @@ export function applyRebalanceRecommendations(portfolio, recommendations) {
   };
 }
 
+/**
+ * Checks whether a quarterly rebalance is due
+ * @param {String} lastRebalanced - ISO timestamp of last rebalance
+ * @param {String} currentDate - ISO timestamp (usually today's date)
+ * @returns {Boolean}
+ */
+export function isQuarterlyRebalanceDue(lastRebalanced, currentDate = new Date().toISOString()) {
+  if (!lastRebalanced) return true;
+
+  const last = new Date(lastRebalanced);
+  const current = new Date(currentDate);
+
+  const diffMonths =
+    (current.getFullYear() - last.getFullYear()) * 12 +
+    (current.getMonth() - last.getMonth());
+
+  return diffMonths >= 3;
+}
+
+/**
+ * Executes quarterly rebalance logic
+ * @param {Object} portfolio - Portfolio object with holdings, targets, lastRebalanced, etc.
+ * @param {String} currentDate - ISO string for simulated or actual date
+ * @returns {Object} - { shouldRebalance, rebalancePlan or reason }
+ */
+export function calculateQuarterlyRebalance(portfolio, currentDate = new Date().toISOString()) {
+  const due = isQuarterlyRebalanceDue(portfolio.lastRebalanced, currentDate);
+
+  if (!due) {
+    return {
+      shouldRebalance: false,
+      reason: `Quarterly rebalance not due yet. Last rebalanced: ${portfolio.lastRebalanced}`,
+      nextAllowedRebalance: computeNextQuarterDate(portfolio.lastRebalanced)
+    };
+  }
+
+  const plan = calculateRebalancePlan(portfolio);
+
+  return {
+    shouldRebalance: true,
+    rebalancePlan: plan
+  };
+}
+
+/**
+ * Utility: compute next allowed rebalance date (3 months later)
+ */
+export function computeNextQuarterDate(lastRebalanced) {
+  if (!lastRebalanced) return null;
+
+  const d = new Date(lastRebalanced);
+  d.setMonth(d.getMonth() + 3);
+  return d.toISOString();
+}
+
 export default {
   calculateCurrentAllocations,
   calculateRebalanceRecommendations,

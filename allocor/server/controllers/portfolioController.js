@@ -130,7 +130,7 @@ export async function executeRebalance(req, res) {
 }
 
 /**
- * Run backtest for a portfolio. Supports weekly frequency (mocked data) and optional export as CSV
+ * Run backtest for a portfolio. Supports weekly and quarterly frequency (mocked data) and optional export as CSV
  */
 export async function backtestPortfolio(req, res) {
   const { id } = req.params;
@@ -147,9 +147,8 @@ export async function backtestPortfolio(req, res) {
   if (isNaN(parsedStart) || isNaN(parsedEnd)) return res.status(400).json({ error: 'Invalid startDate or endDate' });
   if (parsedEnd < parsedStart) return res.status(400).json({ error: 'endDate must be >= startDate' });
 
-  // only weekly implemented here
-  if (frequency !== 'weekly') {
-    return res.status(400).json({ error: 'Only weekly frequency is supported by this endpoint' });
+  if (!['weekly','quarterly'].includes(frequency)) {
+    return res.status(400).json({ error: 'Unsupported frequency' });
   }
 
   try {
@@ -171,8 +170,12 @@ export async function backtestPortfolio(req, res) {
       }
     }
 
-    // run weekly backtest
-    const out = backtestService.runWeeklyBacktest(portfolio, pricesBySymbol, startDate, endDate);
+    let out;
+    if (frequency === 'weekly') {
+      out = backtestService.runWeeklyBacktest(portfolio, pricesBySymbol, startDate, endDate);
+    } else if (frequency === 'quarterly') {
+      out = backtestService.runQuarterlyBacktest(portfolio, pricesBySymbol, startDate, endDate);
+    }
 
     if (exportType === 'csv') {
       // build CSV
