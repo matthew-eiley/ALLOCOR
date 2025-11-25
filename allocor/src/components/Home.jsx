@@ -27,10 +27,10 @@
 
 // //         window.addEventListener('scroll', handleScroll);
 // //         openMenuButton.addEventListener('click', handleMenuClick);
-        
+
 // //         // Initial check for canvas visibility
 // //         handleScroll();
-        
+
 // //         var links = document.querySelectorAll('a[href^="#"]');
 
 // //         links.forEach(function(link) {
@@ -66,7 +66,7 @@
 // //         const loadTubesCursor = async () => {
 // //             try {
 // //                 const TubesCursor = (await import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js')).default;
-                
+
 // //                 if (canvasRef.current && !tubesAppRef.current) {
 // //                     tubesAppRef.current = TubesCursor(canvasRef.current, {
 // //                         tubes: {
@@ -294,55 +294,58 @@
 //   )
 // }
 
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import "../styles/home_styles.scss"
-import Team from "./Team"
-import PortfolioChart from "./PortfolioChart"
+import { useEffect, useRef } from "react";
+import "../styles/home_styles.scss";
+import Team from "./Team";
+import PortfolioChart from "./PortfolioChart";
+import RebalanceChart from "../components/RebalanceForm";
 
 export default function Home() {
-  const canvasRef = useRef(null)
-  const tubesAppRef = useRef(null)
+  const canvasRef = useRef(null);
+  const tubesAppRef = useRef(null);
 
   useEffect(() => {
-    var header = document.getElementById("myHeader")
-    var page = document.getElementById("page")
-    var openMenuButton = document.getElementById("openmenu")
+    var header = document.getElementById("myHeader");
+    var page = document.getElementById("page");
+    var openMenuButton = document.getElementById("openmenu");
 
     const handleScroll = () => {
-      page.classList.remove("menuopen")
+      page.classList.remove("menuopen");
       if (window.scrollY >= 100) {
-        header.classList.add("sticky")
+        header.classList.add("sticky");
       } else {
-        header.classList.remove("sticky")
+        header.classList.remove("sticky");
       }
-    }
+    };
 
     const handleMenuClick = () => {
-      header.classList.remove("sticky")
-      page.classList.add("menuopen")
-    }
+      header.classList.remove("sticky");
+      page.classList.add("menuopen");
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    openMenuButton.addEventListener("click", handleMenuClick)
+    window.addEventListener("scroll", handleScroll);
+    openMenuButton.addEventListener("click", handleMenuClick);
 
     // Initial check for canvas visibility
-    handleScroll()
+    handleScroll();
 
-    var links = document.querySelectorAll('a[href^="#"]')
+    var links = document.querySelectorAll('a[href^="#"]');
 
     links.forEach((link) => {
       link.addEventListener("click", function (event) {
-        event.preventDefault()
-        var targetId = this.getAttribute("href")
-        var targetElement = document.querySelector(targetId)
+        event.preventDefault();
+        var targetId = this.getAttribute("href");
+        var targetElement = document.querySelector(targetId);
 
         if (targetElement) {
-          const headerHeight = document.querySelector("header").offsetHeight
-          const targetTop = targetElement.getBoundingClientRect().top + window.pageYOffset
-          const targetBottom = targetElement.getBoundingClientRect().bottom + window.pageYOffset
-          const sectionHeight = targetElement.offsetHeight
+          const headerHeight = document.querySelector("header").offsetHeight;
+          const targetTop =
+            targetElement.getBoundingClientRect().top + window.pageYOffset;
+          const targetBottom =
+            targetElement.getBoundingClientRect().bottom + window.pageYOffset;
+          const sectionHeight = targetElement.offsetHeight;
 
           console.log("[v0] Navigation Debug:", {
             targetId,
@@ -352,32 +355,34 @@ export default function Home() {
             sectionHeight,
             viewportHeight: window.innerHeight,
             currentScroll: window.pageYOffset,
-          })
+          });
 
-          const targetPosition = targetTop
+          const targetPosition = targetTop;
 
-          console.log("[v0] Scrolling to position:", targetPosition)
+          console.log("[v0] Scrolling to position:", targetPosition);
 
           window.scrollTo({
             top: targetPosition,
             behavior: "smooth",
-          })
+          });
         }
-      })
-    })
+      });
+    });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-      openMenuButton.removeEventListener("click", handleMenuClick)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+      openMenuButton.removeEventListener("click", handleMenuClick);
+    };
+  }, []);
 
   useEffect(() => {
     const loadTubesCursor = async () => {
       try {
         const TubesCursor = (
-          await import("https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js")
-        ).default
+          await import(
+            "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js"
+          )
+        ).default;
 
         if (canvasRef.current && !tubesAppRef.current) {
           tubesAppRef.current = TubesCursor(canvasRef.current, {
@@ -388,7 +393,7 @@ export default function Home() {
                 colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"],
               },
             },
-          })
+          });
 
           const randomColors = (count) => {
             return new Array(count).fill(0).map(
@@ -396,38 +401,38 @@ export default function Home() {
                 "#" +
                 Math.floor(Math.random() * 16777215)
                   .toString(16)
-                  .padStart(6, "0"),
-            )
-          }
+                  .padStart(6, "0")
+            );
+          };
 
           const handleClick = () => {
             if (tubesAppRef.current) {
-              const colors = randomColors(3)
-              const lightsColors = randomColors(4)
-              tubesAppRef.current.tubes.setColors(colors)
-              tubesAppRef.current.tubes.setLightsColors(lightsColors)
+              const colors = randomColors(3);
+              const lightsColors = randomColors(4);
+              tubesAppRef.current.tubes.setColors(colors);
+              tubesAppRef.current.tubes.setLightsColors(lightsColors);
             }
-          }
+          };
 
-          document.body.addEventListener("click", handleClick)
+          document.body.addEventListener("click", handleClick);
 
           return () => {
-            document.body.removeEventListener("click", handleClick)
-          }
+            document.body.removeEventListener("click", handleClick);
+          };
         }
       } catch (error) {
-        console.error("Failed to load TubesCursor:", error)
+        console.error("Failed to load TubesCursor:", error);
       }
-    }
+    };
 
-    loadTubesCursor()
+    loadTubesCursor();
 
     return () => {
       if (tubesAppRef.current && tubesAppRef.current.destroy) {
-        tubesAppRef.current.destroy()
+        tubesAppRef.current.destroy();
       }
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <>
@@ -437,6 +442,7 @@ export default function Home() {
           <a href="#allocor">allocor</a>
           <a href="#optimize">optimize</a>
           <a href="#team">team</a>
+          <a href="#rebalance">rebalance</a>
           <button id="openmenu">
             <span></span>
             <span></span>
@@ -455,7 +461,10 @@ export default function Home() {
         <section id="team">
           <Team />
         </section>
+        <section id="rebalance">
+          <RebalanceChart />
+        </section>
       </div>
     </>
-  )
+  );
 }
