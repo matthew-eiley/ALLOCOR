@@ -236,6 +236,29 @@ export function computeNextQuarterDate(lastRebalanced) {
   return d.toISOString();
 }
 
+// Allowed methods and frequencies
+const SUPPORTED_METHODS = ['Threshold Rebalancing', 'Calendar Rebalancing'];
+const SUPPORTED_FREQUENCIES = ['Monthly', 'Quarterly', 'Weekly'];
+
+export function saveRebalancingSettings({ method, frequency }) {
+  if (!method) throw new Error('Rebalancing method is required');
+  if (!frequency) throw new Error('Frequency is required');
+
+  if (!SUPPORTED_METHODS.includes(method)) {
+    throw new Error('Rebalancing method is not supported');
+  }
+
+  if (!SUPPORTED_FREQUENCIES.includes(frequency)) {
+    throw new Error('Frequency is not supported');
+  }
+
+  return {
+    status: 'saved',
+    settings: { method, frequency }
+  };
+}
+
+
 export default {
   calculateCurrentAllocations,
   calculateRebalanceRecommendations,
