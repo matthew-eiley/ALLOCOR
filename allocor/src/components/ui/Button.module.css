@@ -1,0 +1,33 @@
+.button {
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  padding: 8px 15px;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.text {
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0;
+}
+
+.red {
+  background-color: rgba(237, 9, 9, 0.25);
+}
+
+.green {
+  background-color: rgba(23, 230, 85, 0.25);
+}

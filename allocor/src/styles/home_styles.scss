@@ -41,6 +41,7 @@ section {
 		opacity: .5;
 		height: 100%;
 		width: 100%;
+		pointer-events: none;
 	}
 	
 	h1 {
@@ -219,4 +220,30 @@ header.sticky {
 #allocor {
   position: relative;
   overflow: hidden;
+}
+
+section#optimize {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #1a1a1a, #000);
+  padding: 60px 40px;
+
+  h1 {
+    margin-bottom: 40px;
+  }
+
+  &:after {
+    opacity: 0.3;
+  }
+
+  // Allow scrolling over the chart
+  .recharts-wrapper {
+    pointer-events: auto !important;
+
+    svg {
+      pointer-events: auto !important;
+      touch-action: pan-y !important;
+    }
+  }
 }
